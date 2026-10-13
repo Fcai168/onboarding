@@ -9,53 +9,48 @@
   html,body { height:100%; overflow:hidden; }
   body { font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
     background:linear-gradient(135deg,#667eea 0%,#764ba2 100%); color:#1e293b; }
-  .screen { height:100%; display:flex; flex-direction:column; padding:18px 16px; gap:12px; max-width:480px; margin:0 auto; }
+  .screen { height:100%; display:flex; flex-direction:column; padding:20px 16px 16px; max-width:460px; margin:0 auto; }
 
   /* 顶部欢迎区 */
   .hero { text-align:center; color:#fff; flex-shrink:0; }
-  .hero .emoji { font-size:40px; line-height:1; animation:bounce 2s ease infinite; }
+  .hero .emoji { font-size:38px; line-height:1; animation:bounce 2.2s ease infinite; }
   @keyframes bounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-6px);} }
-  .hero h1 { font-size:22px; margin:8px 0 2px; font-weight:700; letter-spacing:1px; }
-  .hero p { font-size:12px; opacity:.85; }
+  .hero h1 { font-size:22px; margin:8px 0 3px; font-weight:700; letter-spacing:1px; }
+  .hero p { font-size:12.5px; opacity:.85; }
 
-  /* 内容滚动区(仅此处滚动) */
-  .content { flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:12px;
+  /* 内容滚动区 */
+  .content { flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:10px; margin:14px 0;
     -webkit-overflow-scrolling:touch; }
   .content::-webkit-scrollbar { width:0; }
 
-  .card { background:rgba(255,255,255,.96); border-radius:16px; padding:16px;
-    box-shadow:0 6px 20px rgba(0,0,0,.12); backdrop-filter:blur(10px); }
-  .card h2 { font-size:15px; color:#5b3fa8; margin-bottom:12px; display:flex; align-items:center; gap:7px; font-weight:700; }
+  /* 流程卡片 */
+  .card { background:rgba(255,255,255,.96); border-radius:16px; padding:16px 16px;
+    box-shadow:0 8px 24px rgba(0,0,0,.14); backdrop-filter:blur(10px); }
+  .card h2 { font-size:15px; color:#5b3fa8; margin-bottom:14px; display:flex; align-items:center; gap:7px; font-weight:700; }
   .card h2 .ic { width:26px; height:26px; border-radius:8px; background:linear-gradient(135deg,#667eea,#764ba2);
     display:flex; align-items:center; justify-content:center; font-size:14px; }
 
-  /* 流程步骤 - 紧凑 */
-  .steps { display:flex; flex-direction:column; gap:10px; }
-  .step { display:flex; gap:11px; align-items:flex-start; }
-  .step .n { flex-shrink:0; width:24px; height:24px; border-radius:50%;
+  /* 步骤 */
+  .steps { display:flex; flex-direction:column; }
+  .step { display:flex; gap:12px; align-items:flex-start; padding-bottom:14px; }
+  .step:last-child { padding-bottom:0; }
+  .step .left { display:flex; flex-direction:column; align-items:center; flex-shrink:0; }
+  .step .n { width:26px; height:26px; border-radius:50%;
     background:linear-gradient(135deg,#667eea,#764ba2); color:#fff; font-weight:700;
-    display:flex; align-items:center; justify-content:center; font-size:13px; }
-  .step .t { font-weight:600; font-size:13.5px; color:#334155; }
-  .step .d { font-size:12px; color:#64748b; line-height:1.5; margin-top:1px; }
+    display:flex; align-items:center; justify-content:center; font-size:13px; z-index:1; }
+  .step .line { width:2px; flex:1; background:linear-gradient(#c7b9f0,#e9e3fb); margin-top:2px; min-height:14px; }
+  .step:last-child .line { display:none; }
+  .step .t { font-weight:700; font-size:14px; color:#3b2d6b; margin-top:3px; }
+  .step .d { font-size:12px; color:#64748b; line-height:1.5; margin-top:2px; }
 
-  /* 材料清单 - 两列 */
-  .mats { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
-  .mat { display:flex; align-items:center; gap:7px; font-size:12.5px; color:#334155;
-    background:#f5f3ff; padding:8px 10px; border-radius:9px; }
-  .mat .ck { color:#7c3aed; font-weight:700; font-size:13px; }
-
-  /* 联系信息 */
-  .info { display:flex; flex-direction:column; gap:9px; }
-  .row { display:flex; align-items:center; gap:10px; }
-  .row .ic { width:32px; height:32px; border-radius:9px; background:#ede9fe;
-    display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
-  .row .lb { font-size:11px; color:#94a3b8; }
-  .row .vl { font-size:13.5px; font-weight:600; color:#334155; }
-
-  .tip { background:linear-gradient(135deg,#fef3c7,#fde68a); border-radius:12px; padding:11px 13px;
-    font-size:12px; color:#78350f; line-height:1.6; }
-
-  .footer { text-align:center; color:#fff; opacity:.8; font-size:11.5px; padding:2px 0; flex-shrink:0; }
+  /* 底部按钮 */
+  .cta { flex-shrink:0; }
+  .btn { display:block; width:100%; text-align:center; text-decoration:none;
+    background:linear-gradient(135deg,#f59e0b,#f97316); color:#fff; font-size:17px; font-weight:700;
+    padding:15px; border-radius:14px; letter-spacing:2px;
+    box-shadow:0 8px 22px rgba(249,115,22,.4); transition:transform .1s; }
+  .btn:active { transform:scale(.97); }
+  .btn .arrow { margin-left:6px; }
 </style>
 </head>
 <body>
@@ -63,45 +58,49 @@
   <div class="hero">
     <div class="emoji">🎉</div>
     <h1>欢迎加入我们</h1>
-    <p>入职接待中心 · 新同事指引</p>
+    <p>入职接待中心 · 面试入职流程</p>
   </div>
 
   <div class="content">
     <div class="card">
-      <h2><span class="ic">📋</span>入职流程</h2>
+      <h2><span class="ic">📋</span>面试入职流程</h2>
       <div class="steps">
-        <div class="step"><div class="n">1</div><div><div class="t">报到登记</div><div class="d">带齐材料到前台办理入职</div></div></div>
-        <div class="step"><div class="n">2</div><div><div class="t">签订合同</div><div class="d">确认条款签字，领取合同副本</div></div></div>
-        <div class="step"><div class="n">3</div><div><div class="t">领取物资</div><div class="d">工牌、办公用品、门禁卡</div></div></div>
-        <div class="step"><div class="n">4</div><div><div class="t">岗位对接</div><div class="d">部门负责人带领熟悉团队</div></div></div>
+        <div class="step">
+          <div class="left"><div class="n">1</div><div class="line"></div></div>
+          <div><div class="t">线上报到</div><div class="d">添加面试联系人，确认面试时间与会议链接</div></div>
+        </div>
+        <div class="step">
+          <div class="left"><div class="n">2</div><div class="line"></div></div>
+          <div><div class="t">线上面试</div><div class="d">视频面试，了解基本情况与岗位匹配度</div></div>
+        </div>
+        <div class="step">
+          <div class="left"><div class="n">3</div><div class="line"></div></div>
+          <div><div class="t">工作介绍</div><div class="d">介绍岗位职责、工作内容、薪资待遇及注意事项</div></div>
+        </div>
+        <div class="step">
+          <div class="left"><div class="n">4</div><div class="line"></div></div>
+          <div><div class="t">简单培训</div><div class="d">进行基础操作培训，熟悉工作流程与要求</div></div>
+        </div>
+        <div class="step">
+          <div class="left"><div class="n">5</div></div>
+          <div><div class="t">确认入职</div><div class="d">确认意向，办理相关入职手续</div></div>
+        </div>
       </div>
     </div>
-
-    <div class="card">
-      <h2><span class="ic">📝</span>报到材料</h2>
-      <div class="mats">
-        <div class="mat"><span class="ck">✓</span>身份证原件复印件</div>
-        <div class="mat"><span class="ck">✓</span>学历证书原件</div>
-        <div class="mat"><span class="ck">✓</span>一寸照片 2 张</div>
-        <div class="mat"><span class="ck">✓</span>离职证明(如有)</div>
-        <div class="mat"><span class="ck">✓</span>近月体检报告</div>
-        <div class="mat"><span class="ck">✓</span>本人银行卡</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <h2><span class="ic">📞</span>入职信息</h2>
-      <div class="info">
-        <div class="row"><div class="ic">🧑‍💼</div><div><div class="lb">对接部门</div><div class="vl">人事部</div></div></div>
-        <div class="row"><div class="ic">🏢</div><div><div class="lb">报到地点</div><div class="vl">公司前台</div></div></div>
-        <div class="row"><div class="ic">⏰</div><div><div class="lb">报到时间</div><div class="vl">工作日 9:00 - 18:00</div></div></div>
-      </div>
-    </div>
-
-    <div class="tip">💡 材料不齐可先报到登记，后续补齐。有疑问随时联系人事部。</div>
   </div>
 
-  <div class="footer">再次欢迎你的加入 🤝 祝你工作顺利</div>
+  <div class="cta">
+    <a class="btn" href="#" onclick="return enterInterview();">立即进入面试<span class="arrow">→</span></a>
+  </div>
 </div>
+<script>
+function enterInterview(){
+  // 面试入口链接待配置（会议链接/表单等）
+  var url = ''; // ← 在这里填入面试链接
+  if(!url){ alert('面试入口链接待配置'); return false; }
+  window.location.href = url;
+  return false;
+}
+</script>
 </body>
 </html>

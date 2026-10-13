@@ -2,125 +2,106 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>入职接待中心</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>入职接待</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html,body { height:100%; overflow:hidden; }
   body { font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
-    background:linear-gradient(160deg,#0f766e,#14b8a6); min-height:100vh; color:#1e293b; }
-  .container { max-width:640px; margin:0 auto; padding:24px 16px 40px; }
-  .hero { text-align:center; color:#fff; padding:32px 16px 28px; }
-  .hero .emoji { font-size:52px; }
-  .hero h1 { font-size:26px; margin:12px 0 6px; font-weight:700; }
-  .hero p { font-size:15px; opacity:.92; }
-  .card { background:#fff; border-radius:16px; padding:22px 20px; margin-top:16px;
-    box-shadow:0 8px 24px rgba(0,0,0,.12); }
-  .card h2 { font-size:18px; color:#0f766e; margin-bottom:14px; display:flex; align-items:center; gap:8px; }
-  .step { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid #f1f5f9; }
-  .step:last-child { border-bottom:none; }
-  .step .num { flex-shrink:0; width:30px; height:30px; border-radius:50%; background:#ccfbf1;
-    color:#0f766e; font-weight:700; display:flex; align-items:center; justify-content:center; font-size:15px; }
-  .step .body { flex:1; }
-  .step .title { font-weight:600; font-size:15px; margin-bottom:3px; }
-  .step .desc { font-size:13px; color:#64748b; line-height:1.6; }
-  .note { background:#fef9c3; border-left:4px solid #eab308; padding:14px 16px;
-    border-radius:8px; margin-top:16px; font-size:14px; line-height:1.7; color:#713f12; }
-  .contact { display:flex; align-items:center; gap:12px; padding:12px 0; }
-  .contact .icon { width:40px; height:40px; border-radius:10px; background:#ccfbf1;
-    display:flex; align-items:center; justify-content:center; font-size:20px; }
-  .contact .label { font-size:13px; color:#64748b; }
-  .contact .value { font-size:15px; font-weight:600; }
-  .footer { text-align:center; color:#fff; opacity:.85; font-size:13px; margin-top:28px; line-height:1.7; }
-  ul.check { list-style:none; }
-  ul.check li { padding:9px 0 9px 28px; position:relative; font-size:14px; line-height:1.6; color:#334155; }
-  ul.check li::before { content:"✓"; position:absolute; left:0; color:#0f766e; font-weight:700; }
+    background:linear-gradient(135deg,#667eea 0%,#764ba2 100%); color:#1e293b; }
+  .screen { height:100%; display:flex; flex-direction:column; padding:18px 16px; gap:12px; max-width:480px; margin:0 auto; }
+
+  /* 顶部欢迎区 */
+  .hero { text-align:center; color:#fff; flex-shrink:0; }
+  .hero .emoji { font-size:40px; line-height:1; animation:bounce 2s ease infinite; }
+  @keyframes bounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-6px);} }
+  .hero h1 { font-size:22px; margin:8px 0 2px; font-weight:700; letter-spacing:1px; }
+  .hero p { font-size:12px; opacity:.85; }
+
+  /* 内容滚动区(仅此处滚动) */
+  .content { flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:12px;
+    -webkit-overflow-scrolling:touch; }
+  .content::-webkit-scrollbar { width:0; }
+
+  .card { background:rgba(255,255,255,.96); border-radius:16px; padding:16px;
+    box-shadow:0 6px 20px rgba(0,0,0,.12); backdrop-filter:blur(10px); }
+  .card h2 { font-size:15px; color:#5b3fa8; margin-bottom:12px; display:flex; align-items:center; gap:7px; font-weight:700; }
+  .card h2 .ic { width:26px; height:26px; border-radius:8px; background:linear-gradient(135deg,#667eea,#764ba2);
+    display:flex; align-items:center; justify-content:center; font-size:14px; }
+
+  /* 流程步骤 - 紧凑 */
+  .steps { display:flex; flex-direction:column; gap:10px; }
+  .step { display:flex; gap:11px; align-items:flex-start; }
+  .step .n { flex-shrink:0; width:24px; height:24px; border-radius:50%;
+    background:linear-gradient(135deg,#667eea,#764ba2); color:#fff; font-weight:700;
+    display:flex; align-items:center; justify-content:center; font-size:13px; }
+  .step .t { font-weight:600; font-size:13.5px; color:#334155; }
+  .step .d { font-size:12px; color:#64748b; line-height:1.5; margin-top:1px; }
+
+  /* 材料清单 - 两列 */
+  .mats { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .mat { display:flex; align-items:center; gap:7px; font-size:12.5px; color:#334155;
+    background:#f5f3ff; padding:8px 10px; border-radius:9px; }
+  .mat .ck { color:#7c3aed; font-weight:700; font-size:13px; }
+
+  /* 联系信息 */
+  .info { display:flex; flex-direction:column; gap:9px; }
+  .row { display:flex; align-items:center; gap:10px; }
+  .row .ic { width:32px; height:32px; border-radius:9px; background:#ede9fe;
+    display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .row .lb { font-size:11px; color:#94a3b8; }
+  .row .vl { font-size:13.5px; font-weight:600; color:#334155; }
+
+  .tip { background:linear-gradient(135deg,#fef3c7,#fde68a); border-radius:12px; padding:11px 13px;
+    font-size:12px; color:#78350f; line-height:1.6; }
+
+  .footer { text-align:center; color:#fff; opacity:.8; font-size:11.5px; padding:2px 0; flex-shrink:0; }
 </style>
 </head>
 <body>
-<div class="container">
+<div class="screen">
   <div class="hero">
     <div class="emoji">🎉</div>
     <h1>欢迎加入我们</h1>
     <p>入职接待中心 · 新同事指引</p>
   </div>
 
-  <div class="card">
-    <h2>📋 入职流程</h2>
-    <div class="step">
-      <div class="num">1</div>
-      <div class="body">
-        <div class="title">报到登记</div>
-        <div class="desc">携带身份证原件、学历证书、一寸照片 2 张，到前台办理入职登记。</div>
+  <div class="content">
+    <div class="card">
+      <h2><span class="ic">📋</span>入职流程</h2>
+      <div class="steps">
+        <div class="step"><div class="n">1</div><div><div class="t">报到登记</div><div class="d">带齐材料到前台办理入职</div></div></div>
+        <div class="step"><div class="n">2</div><div><div class="t">签订合同</div><div class="d">确认条款签字，领取合同副本</div></div></div>
+        <div class="step"><div class="n">3</div><div><div class="t">领取物资</div><div class="d">工牌、办公用品、门禁卡</div></div></div>
+        <div class="step"><div class="n">4</div><div><div class="t">岗位对接</div><div class="d">部门负责人带领熟悉团队</div></div></div>
       </div>
     </div>
-    <div class="step">
-      <div class="num">2</div>
-      <div class="body">
-        <div class="title">签订合同</div>
-        <div class="desc">与人事确认劳动合同条款，完成签字盖章，领取合同副本。</div>
+
+    <div class="card">
+      <h2><span class="ic">📝</span>报到材料</h2>
+      <div class="mats">
+        <div class="mat"><span class="ck">✓</span>身份证原件复印件</div>
+        <div class="mat"><span class="ck">✓</span>学历证书原件</div>
+        <div class="mat"><span class="ck">✓</span>一寸照片 2 张</div>
+        <div class="mat"><span class="ck">✓</span>离职证明(如有)</div>
+        <div class="mat"><span class="ck">✓</span>近月体检报告</div>
+        <div class="mat"><span class="ck">✓</span>本人银行卡</div>
       </div>
     </div>
-    <div class="step">
-      <div class="num">3</div>
-      <div class="body">
-        <div class="title">领取物资</div>
-        <div class="desc">领取工牌、办公用品及门禁卡，熟悉办公区域。</div>
+
+    <div class="card">
+      <h2><span class="ic">📞</span>入职信息</h2>
+      <div class="info">
+        <div class="row"><div class="ic">🧑‍💼</div><div><div class="lb">对接部门</div><div class="vl">人事部</div></div></div>
+        <div class="row"><div class="ic">🏢</div><div><div class="lb">报到地点</div><div class="vl">公司前台</div></div></div>
+        <div class="row"><div class="ic">⏰</div><div><div class="lb">报到时间</div><div class="vl">工作日 9:00 - 18:00</div></div></div>
       </div>
     </div>
-    <div class="step">
-      <div class="num">4</div>
-      <div class="body">
-        <div class="title">岗位对接</div>
-        <div class="desc">由部门负责人带领熟悉团队、安排工位并介绍工作内容。</div>
-      </div>
-    </div>
+
+    <div class="tip">💡 材料不齐可先报到登记，后续补齐。有疑问随时联系人事部。</div>
   </div>
 
-  <div class="card">
-    <h2>📝 报到材料清单</h2>
-    <ul class="check">
-      <li>身份证原件及复印件</li>
-      <li>学历 / 学位证书原件</li>
-      <li>一寸免冠照片 2 张</li>
-      <li>上家单位离职证明（如有）</li>
-      <li>体检报告（近一个月内）</li>
-      <li>银行卡（用于工资发放）</li>
-    </ul>
-  </div>
-
-  <div class="card">
-    <h2>📞 入职联系人</h2>
-    <div class="contact">
-      <div class="icon">🧑‍💼</div>
-      <div>
-        <div class="label">人事部</div>
-        <div class="value">请咨询前台或部门负责人</div>
-      </div>
-    </div>
-    <div class="contact">
-      <div class="icon">🏢</div>
-      <div>
-        <div class="label">报到地点</div>
-        <div class="value">公司前台</div>
-      </div>
-    </div>
-    <div class="contact">
-      <div class="icon">⏰</div>
-      <div>
-        <div class="label">报到时间</div>
-        <div class="value">工作日 9:00 - 18:00</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="note">
-    💡 <b>温馨提示</b>：如材料不齐，可先报到登记，后续补齐即可。有任何疑问，请随时联系人事部。
-  </div>
-
-  <div class="footer">
-    再次欢迎你的加入，期待与你共事 🤝<br>
-    祝你工作顺利
-  </div>
+  <div class="footer">再次欢迎你的加入 🤝 祝你工作顺利</div>
 </div>
 </body>
 </html>
